@@ -4,11 +4,14 @@ class TabManager {
     this.componentMapping = componentMapping;
   }
 
-  async openTabById(id) {
+  async openTab(id, props = {}) {
     if (id in this.componentMapping) {
-      const { component, params: [...props] } = this.componentMapping[id];
+      const { component, params } = this.componentMapping[id];
       this.rootElement.innerHTML = '';
-      this.rootElement.appendChild(await component(...props));
+      this.rootElement.appendChild(await component({
+        ...params,
+        ...props
+      }));
     } else {
       console.error('Invalid id provided');
     }

@@ -14,6 +14,17 @@ class Api {
     const res = await req.json();
     return res.results;
   }
+
+  async getCharactersByIds(...ids) {
+    const url = new URL(`${this.baseURL}/character/${ids.join(',')}`);
+    const req = await fetch(url);
+    const res = await req.json();
+    if (ids.length === 1) {
+      return [res];
+    } else {
+      return res;
+    }
+  }
 }
 
 export default new Api();

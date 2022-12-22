@@ -4,26 +4,31 @@ import TabManager from './src/utils/TabManager';
 import api from './src/utils/Api';
 
 
-const rootElement = document.querySelector('#app')
+const rootElement = document.querySelector('#app');
 
 const tabManager = new TabManager(rootElement, {
   characters: {
     component: CharacterCardList,
-    params: [(await api.getCharacters()).map((character) => CharacterCard(character))]
+    params: { characterCards: (await api.getCharacters()).map((character) => CharacterCard({ character })) },
   },
+  character: {
+    component: CharacterCard,
+    params: {}
+  }
   // page2: {
   //   component: ListOfPost,
   //   params: ['https://jsonplaceholder.typicode.com/posts']
   // }
 });
+window.tabManager = tabManager;
 
 document.querySelectorAll('[data-tabId]').forEach(element => {
   element.addEventListener('click', () => {
-    tabManager.openTabById(element.getAttribute('data-tabId'));
+    tabManager.openTab(element.getAttribute('data-tabId'), { test: 'bonjour' });
   });
 });
 
-// tabManager.openTabById('page1')
+// tabManager.openTab('page1')
 
 // import api from './src/utils/Api';
 

@@ -11,13 +11,19 @@ const createElement = ({ tagName, ...rest }) => {
   }
 
   if ('attributes' in rest) {
-    for (let [key, value] of Object.entries(rest.attributes)) {
+    for (const [key, value] of Object.entries(rest.attributes)) {
       element.setAttribute(key, value);
     }
   }
 
+  if ('listeners' in rest) {
+    for (const { event, callback } of rest.listeners) {
+      element.addEventListener(event, callback);
+    }
+  }
+
   if ('children' in rest) {
-    for (let e of createBulkElement(rest.children)) element.appendChild(e);
+    for (const e of createBulkElement(rest.children)) element.appendChild(e);
   }
 
   return element;
@@ -32,4 +38,4 @@ export const createBulkElement = (elements) => {
 };
 
 
-export default createElement
+export default createElement;
