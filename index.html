@@ -10,7 +10,9 @@
 
 <body>
   <header>
-    <button data-tabId="characters">page1</button>
+    <button data-tabId="characters">Characters list</button>
+    <!-- <button data-tabId="location">Location list</button>
+    <button data-tabId="episode">Episode list</button> -->
     <!-- <button data-tabId="page2">page2</button> -->
   </header>
   <div id="app"></div>
@@ -25,7 +27,9 @@
       </div>
       <section class="character-card-main-info">
         <div class="section">
-          <span class="name"></span>
+          <a href="#" onclick="openTab(...rest)">
+            <span class="name"></span>
+          </a>
           <span class="status"></span>
         </div>
         <div class="section">
