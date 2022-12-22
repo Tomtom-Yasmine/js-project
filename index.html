@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <header>
-      <button data-tabId="page1">page1</button>
-      <button data-tabId="page2">page2</button>
-    </header>
-    <div id="app"></div>
-    <template id="listOfElement">
-      <div>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <header>
+    <button data-tabId="characters">page1</button>
+    <!-- <button data-tabId="page2">page2</button> -->
+  </header>
+  <div id="app"></div>
+  <template id="listOfElement">
+    <div>
+    </div>
+  </template>
+  <template id="test">
+    <div class="character-card">
+      <div class="character-card-image">
+        <img src="" alt="" />
       </div>
-    </template>
-    <script type="module" src="/main.js"></script>
-  </body>
+      <section class="character-card-main-info">
+        <div class="section">
+          <span class="name"></span>
+          <span class="status"></span>
+        </div>
+        <div class="section">
+          <span class="species"></span>
+          <span class="gender"></span>
+        </div>
+        <div class="section">
+          <p>Last known location:</p>
+          <span class="location"></span>
+        </div>
+        <div class="section">
+          <p>Origin:</p>
+          <span class="origin"></span>
+        </div>
+      </section>
+    </div>
+  </template>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

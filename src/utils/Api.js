@@ -1,14 +1,19 @@
 
-export const getUserFromApi = async () => {
-  const req = await fetch('https://reqres.in/api/users')
-  const res = await req.json()
+class Api {
 
-  return res.data
+  constructor() {
+    this.baseURL = 'https://rickandmortyapi.com/api';
+  }
+
+  async getCharacters(filters = {}) {
+    const url = new URL(`${this.baseURL}/character`);
+    for (const [key, value] of Object.entries(filters)) {
+      url.searchParams.append(key, value);
+    }
+    const req = await fetch(url);
+    const res = await req.json();
+    return res.results;
+  }
 }
 
-export const getPostFromApi = async () => {
-  const req = await fetch('https://jsonplaceholder.typicode.com/posts')
-  const res = await req.json()
-
-  return res
-}
+export default new Api();
