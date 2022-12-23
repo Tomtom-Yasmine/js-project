@@ -67,7 +67,7 @@ const CharacterCard = ({ character }) => {
                         {
                             tagName: 'li',
                             classes: ['list-group-item', 'status'],
-                            text: `Satus : ${status}`,
+                            text: `Status : ${status}`,
                         },
                         {
                             tagName: 'li',
