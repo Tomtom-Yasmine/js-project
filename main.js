@@ -2,6 +2,7 @@ import CardList from './src/components/CardList';
 import { FilterFieldTypes } from './src/components/FilterForm';
 import CardListWithFilterForm from './src/components/CardListWithFilterForm';
 import CharacterCard from './src/components/CharacterCard';
+import LocationCard from './src/components/LocationCard';
 import TabManager from './src/utils/TabManager';
 import api from './src/utils/Api';
 
@@ -23,11 +24,15 @@ export const tabManager = new TabManager(rootElement, {
   character: {
     component: CharacterCard,
     params: {}
-  }
-  // page2: {
-  //   component: ListOfPost,
-  //   params: ['https://jsonplaceholder.typicode.com/posts']
-  // }
+  },
+  locations: {
+    component: CardListWithFilterForm,
+    params: { cards: (await api.getLocations()).map((location) => LocationCard({ location })) }
+  },
+  location: {
+    component: LocationCard,
+    params: {}
+  },
 });
 
 document.querySelectorAll('[data-tabId]').forEach(element => {
