@@ -28,6 +28,14 @@ Install project with npm
 
 ```
 
+## Run tests
+
+```bash
+
+  npm test
+
+```
+
 ## Build project
 
 ```bash
