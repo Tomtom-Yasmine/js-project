@@ -25,7 +25,7 @@ const createElement = ({
   }
 
   /** create and append children */
-  for (const childElement of createBulkElement(children)) {
+  for (const childElement of createBulkElements(children)) {
     element.appendChild(childElement);
   }
 
@@ -33,7 +33,7 @@ const createElement = ({
 };
 
 
-export const createBulkElement = (elements) => {
+export const createBulkElements = (elements) => {
   return elements.map((element) => createElement(element));
 };
 
