@@ -1,4 +1,5 @@
 import createElement from '../utils/createElement';
+import { tabManager } from '../../main';
 
 
 export const FilterFieldTypes = {
@@ -9,14 +10,39 @@ export const FilterFieldTypes = {
             attributes: {
                 type: 'search'
             }
-        }
+        },
+        getValue: (inputElement) => inputElement.value,
+        setValue: (inputElement, value) => (inputElement.value = value)
+    },
+    Select: {
+        element: {
+            tagName: 'select',
+            classes: ['filter-field-type-select']
+        },
+        getValue: (inputElement) => inputElement.value,
+        setValue: (inputElement, value) => (inputElement.value = value)
     }
 };
 
 
 const FilterForm = ({
-    fields = {}
+    filterCallback = (formData) => null,
+    fields = {},
+    filters = {},
+    ...otherParams
 }) => {
+    const fetchFormData = (formElement) => {
+        return [...formElement.querySelectorAll('.field-input')].reduce((formData, inputElement) => {
+            const fieldName = inputElement.getAttribute('name');
+            const fieldType = fields[fieldName].type;
+            formData[fieldName] = {
+                value: fieldType.getValue(inputElement),
+                hasFocus: inputElement === document.activeElement
+            };
+            return formData;
+        }, {});
+    };
+
     const children = Object.entries(fields).map(([fieldName, {
         type, // 'search' | 'select'
         label = fieldName,
@@ -43,14 +69,28 @@ const FilterForm = ({
                 },
                 {
                     ...type.element,
+                    classes: ['field-input'],
                     attributes: {
                         name: fieldName,
-                        id: fieldId
-                    }
+                        id: fieldId,
+                        [canSelectMultiple ? 'multiple' : null]: '',
+                        value: filters[fieldName]?.value || ''
+                    },
+                    listeners: [
+                        {
+                            event: 'input',
+                            callback: (event) => {
+                                const formElement = event.target.closest('form');
+                                const formData = fetchFormData(formElement);
+                                return filterCallback(formData);
+                            }
+                        }
+                    ]
                 }
             ]
         };
     });
+    
     return createElement({
         tagName: 'form',
         classes: ['filter-form'],
