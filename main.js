@@ -1,4 +1,5 @@
 import CardList from './src/components/CardList';
+import { FilterFieldTypes } from './src/components/FilterForm';
 import CardListWithFilterForm from './src/components/CardListWithFilterForm';
 import CharacterCard from './src/components/CharacterCard';
 import TabManager from './src/utils/TabManager';
@@ -10,7 +11,14 @@ const rootElement = document.querySelector('#app');
 export const tabManager = new TabManager(rootElement, {
   characters: {
     component: CardListWithFilterForm,
-    params: { cards: (await api.getCharacters()).map((character) => CharacterCard({ character })) },
+    params: {
+      fields: {
+        name: {
+          type: FilterFieldTypes.Search
+        }
+      },
+      cards: (await api.getCharacters()).map((character) => CharacterCard({ character }))
+    },
   },
   character: {
     component: CharacterCard,
