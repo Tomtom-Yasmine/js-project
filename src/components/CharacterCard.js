@@ -18,23 +18,23 @@ const CharacterCard = ({ character }) => {
     return createElement(
         {
             tagName: 'div',
-            classList: ['character-card', 'card', 'mb-3', 'ms-3'],
+            classes: ['character-card', 'card', 'mb-3', 'ms-3'],
             children: [
                 {
                     tagName: 'img',
-                    classList: ['card-img-top'],
+                    classes: ['card-img-top'],
                     attributes: {
                         src: image || 'https://via.placeholder.com/150'
                     }
                 },
                 {
                     tagName: 'div',
-                    classList: ['card-body'],
+                    classes: ['card-body'],
                     children: [
                         {
                             tagName: 'h5',
                             text: name,
-                            classList: ['name', 'clickable', 'card-title'],
+                            classes: ['name', 'clickable', 'card-title'],
                             listeners: [
                                 {
                                     event: 'click',
@@ -43,7 +43,7 @@ const CharacterCard = ({ character }) => {
                                         if (!character) {
                                             throw new Error(`Character with id ${id} not found.`);
                                         }
-                                        window.tabManager.openTab('character', { character });
+                                        tabManager.openTab('character', { character });
                                     }
                                 }
                             ]
@@ -52,31 +52,31 @@ const CharacterCard = ({ character }) => {
                 },
                 {
                     tagName: 'ul',
-                    classList: ['list-group', 'list-group-flush'],
+                    classes: ['list-group', 'list-group-flush'],
                     children: [
                         {
                             tagName: 'li',
-                            classList: ['list-group-item', 'species'],
+                            classes: ['list-group-item', 'species'],
                             text: `Species : ${species}`,
                         },
                         {
                             tagName: 'li',
-                            classList: ['list-group-item', 'gender'],
+                            classes: ['list-group-item', 'gender'],
                             text: `Gender : ${gender}`,
                         },
                         {
                             tagName: 'li',
-                            classList: ['list-group-item', 'status'],
+                            classes: ['list-group-item', 'status'],
                             text: `Satus : ${status}`,
                         },
                         {
                             tagName: 'li',
-                            classList: ['list-group-item', 'location'],
+                            classes: ['list-group-item', 'location'],
                             text: `Last know location : ${locationName}`,
                         },
                         {
                             tagName: 'li',
-                            classList: ['list-group-item', 'origin'],
+                            classes: ['list-group-item', 'origin'],
                             text: `First seen in : ${originName}`,
                         },
                     ]

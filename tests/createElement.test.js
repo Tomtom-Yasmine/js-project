@@ -3,7 +3,7 @@ import createElement from '../src/utils/createElement'
 
 const tree = {
   tagName: 'div',
-  classList: ['columns', 'is-half'],
+  classes: ['columns', 'is-half'],
   text: 'Hello World!',
   attributes: {
     "data-test-id": 'myElement'
