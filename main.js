@@ -1,15 +1,16 @@
+import CardList from './src/components/CardList';
+import CardListWithFilterForm from './src/components/CardListWithFilterForm';
 import CharacterCard from './src/components/CharacterCard';
-import CharacterCardList from './src/components/CharacterCardList';
 import TabManager from './src/utils/TabManager';
 import api from './src/utils/Api';
 
 
 const rootElement = document.querySelector('#app');
 
-const tabManager = new TabManager(rootElement, {
+export const tabManager = new TabManager(rootElement, {
   characters: {
-    component: CharacterCardList,
-    params: { characterCards: (await api.getCharacters()).map((character) => CharacterCard({ character })) },
+    component: CardListWithFilterForm,
+    params: { cards: (await api.getCharacters()).map((character) => CharacterCard({ character })) },
   },
   character: {
     component: CharacterCard,
@@ -20,7 +21,6 @@ const tabManager = new TabManager(rootElement, {
   //   params: ['https://jsonplaceholder.typicode.com/posts']
   // }
 });
-window.tabManager = tabManager;
 
 document.querySelectorAll('[data-tabId]').forEach(element => {
   element.addEventListener('click', () => {

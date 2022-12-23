@@ -1,40 +1,40 @@
-
-const createElement = ({ tagName, ...rest }) => {
+const createElement = ({
+  tagName = 'div',
+  text = '',
+  classes = [],
+  attributes = {},
+  listeners = [],
+  children = []
+}) => {
   const element = document.createElement(tagName);
 
-  if ('classList' in rest) {
-    element.classList.add(...rest.classList);
+  /** set text content */
+  element.textContent = text;
+
+  /** add classes */
+  element.classList.add(...classes);
+
+  /** set attributes */
+  for (const [ key, value ] of Object.entries(attributes)) {
+    element.setAttribute(key, value);
   }
 
-  if ('text' in rest) {
-    element.textContent = rest.text;
+  /** add event listeners */
+  for (const { event, callback } of listeners) {
+    element.addEventListener(event, callback);
   }
 
-  if ('attributes' in rest) {
-    for (const [key, value] of Object.entries(rest.attributes)) {
-      element.setAttribute(key, value);
-    }
-  }
-
-  if ('listeners' in rest) {
-    for (const { event, callback } of rest.listeners) {
-      element.addEventListener(event, callback);
-    }
-  }
-
-  if ('children' in rest) {
-    for (const e of createBulkElement(rest.children)) element.appendChild(e);
+  /** create and append children */
+  for (const childElement of createBulkElement(children)) {
+    element.appendChild(childElement);
   }
 
   return element;
 };
 
+
 export const createBulkElement = (elements) => {
-  const result = [];
-  for (let element of elements) {
-    result.push(createElement(element));
-  }
-  return result;
+  return elements.map((element) => createElement(element));
 };
 
 

@@ -1,5 +1,6 @@
-import createElement from "../utils/createElement";
+import createElement from '../utils/createElement';
 import api from '../utils/Api';
+import { tabManager } from '../../main';
 
 
 const CharacterCard = ({ character }) => {
@@ -17,7 +18,7 @@ const CharacterCard = ({ character }) => {
     return createElement(
         {
             tagName: 'div',
-            classList: ['character-card'],
+            classes: ['character-card'],
             children: [
                 {
                     tagName: 'div',
@@ -51,7 +52,7 @@ const CharacterCard = ({ character }) => {
                                                 if (!character) {
                                                     throw new Error(`Character with id ${id} not found.`);
                                                 }
-                                                window.tabManager.openTab('character', { character });
+                                                tabManager.openTab('character', { character });
                                             }
                                         }
                                     ]
@@ -85,7 +86,7 @@ const CharacterCard = ({ character }) => {
                             children: [
                                 {
                                     tagName: 'p',
-                                    text: "Last known location:"
+                                    text: 'Last known location:'
                                 },
                                 {
                                     tagName: 'span',
@@ -100,7 +101,7 @@ const CharacterCard = ({ character }) => {
                             children: [
                                 {
                                     tagName: 'p',
-                                    text: "Origin:"
+                                    text: 'Origin:'
                                 },
                                 {
                                     tagName: 'span',

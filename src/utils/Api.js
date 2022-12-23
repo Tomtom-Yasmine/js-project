@@ -1,4 +1,3 @@
-
 class Api {
 
   constructor() {
@@ -26,5 +25,6 @@ class Api {
     }
   }
 }
+
 
 export default new Api();
