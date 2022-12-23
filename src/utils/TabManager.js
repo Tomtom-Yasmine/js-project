@@ -13,7 +13,7 @@ class TabManager {
         ...props
       }));
     } else {
-      console.error('Invalid id provided');
+      console.error(`Tab with id ${id} is invalid`);
     }
   }
 }

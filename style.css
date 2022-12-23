@@ -112,7 +112,8 @@ button:focus-visible {
   max-width: 500px;
 }
 
-.name {
+.clickable {
   cursor: pointer;
   font-weight: bold;
+  color: rgb(26, 210, 149);
 }
