@@ -71,8 +71,22 @@ const CharacterCard = ({ character }) => {
                         },
                         {
                             tagName: 'li',
-                            classes: ['list-group-item', 'location'],
+                            classes: ['list-group-item', 'location', 'clickable'],
                             text: `Last know location : ${locationName}`,
+                            listeners: [
+                                {
+                                    event: 'click',
+                                    callback: async () => {
+                                        if (locationName != "unknown") {
+                                            const location = (await api.getLocationsByIds(id) || [null])[0];
+                                            if (!location) {
+                                                throw new Error(`Location with id ${id} not found.`);
+                                            }
+                                            tabManager.openTab('location', { location });
+                                        }
+                                    }
+                                }
+                            ]
                         },
                         {
                             tagName: 'li',
