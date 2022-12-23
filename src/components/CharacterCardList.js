@@ -5,7 +5,7 @@ const CharacterCardList = ({ characterCards }) => {
     console.log({ characterCards });
     const element = createElement({
         tagName: 'div',
-        classList: ['list-of-character-cards'],
+        classList: ['list-of-character-cards', 'd-flex', 'flex-direction-row', 'flex-wrap', 'justify-content-center'],
     });
     characterCards.forEach((characterCard) => {
         element.appendChild(characterCard);
