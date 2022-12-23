@@ -18,97 +18,66 @@ const CharacterCard = ({ character }) => {
     return createElement(
         {
             tagName: 'div',
-            classes: ['character-card'],
+            classList: ['character-card', 'card', 'mb-3', 'ms-3'],
             children: [
                 {
+                    tagName: 'img',
+                    classList: ['card-img-top'],
+                    attributes: {
+                        src: image || 'https://via.placeholder.com/150'
+                    }
+                },
+                {
                     tagName: 'div',
-                    classList: ['character-card-image'],
+                    classList: ['card-body'],
                     children: [
                         {
-                            tagName: 'img',
-                            attributes: {
-                                src: image || 'https://via.placeholder.com/150'
-                            }
-                        }
+                            tagName: 'h5',
+                            text: name,
+                            classList: ['name', 'clickable', 'card-title'],
+                            listeners: [
+                                {
+                                    event: 'click',
+                                    callback: async () => {
+                                        const character = (await api.getCharactersByIds(id) || [null])[0];
+                                        if (!character) {
+                                            throw new Error(`Character with id ${id} not found.`);
+                                        }
+                                        window.tabManager.openTab('character', { character });
+                                    }
+                                }
+                            ]
+                        },
                     ]
                 },
                 {
-                    tagName: 'section',
-                    classList: ['character-card-main-info'],
+                    tagName: 'ul',
+                    classList: ['list-group', 'list-group-flush'],
                     children: [
                         {
-                            tagName: 'div',
-                            classList: ['section'],
-                            children: [
-                                {
-                                    tagName: 'span',
-                                    classList: ['name', 'clickable'],
-                                    text: name,
-                                    listeners: [
-                                        {
-                                            event: 'click',
-                                            callback: async () => {
-                                                const character = (await api.getCharactersByIds(id) || [null])[0];
-                                                if (!character) {
-                                                    throw new Error(`Character with id ${id} not found.`);
-                                                }
-                                                tabManager.openTab('character', { character });
-                                            }
-                                        }
-                                    ]
-                                },
-                                {
-                                    tagName: 'span',
-                                    classList: ['status'],
-                                    text: status
-                                }
-                            ]
+                            tagName: 'li',
+                            classList: ['list-group-item', 'species'],
+                            text: `Species : ${species}`,
                         },
                         {
-                            tagName: 'div',
-                            classList: ['section'],
-                            children: [
-                                {
-                                    tagName: 'span',
-                                    classList: ['species'],
-                                    text: species
-                                },
-                                {
-                                    tagName: 'span',
-                                    classList: ['gender'],
-                                    text: gender
-                                }
-                            ]
+                            tagName: 'li',
+                            classList: ['list-group-item', 'gender'],
+                            text: `Gender : ${gender}`,
                         },
                         {
-                            tagName: 'div',
-                            classList: ['section'],
-                            children: [
-                                {
-                                    tagName: 'p',
-                                    text: 'Last known location:'
-                                },
-                                {
-                                    tagName: 'span',
-                                    classList: ['location'],
-                                    text: locationName
-                                }
-                            ]
+                            tagName: 'li',
+                            classList: ['list-group-item', 'status'],
+                            text: `Satus : ${status}`,
                         },
                         {
-                            tagName: 'div',
-                            classList: ['section'],
-                            children: [
-                                {
-                                    tagName: 'p',
-                                    text: 'Origin:'
-                                },
-                                {
-                                    tagName: 'span',
-                                    classList: ['origin'],
-                                    text: originName
-                                }
-                            ]
+                            tagName: 'li',
+                            classList: ['list-group-item', 'location'],
+                            text: `Last know location : ${locationName}`,
+                        },
+                        {
+                            tagName: 'li',
+                            classList: ['list-group-item', 'origin'],
+                            text: `First seen in : ${originName}`,
                         },
                     ]
                 },
